@@ -53,8 +53,8 @@ module CsvMapper
       @start_at_row = [ @start_at_row, 1 ].max
       @csv_data.rewind
       attributes.each_with_index do |name, index|
-        name.to_s.strip!
-        use_name = aliases[name] || name.gsub(/\s+/, '_').gsub(/[\W]+/, '').downcase
+        title = name.to_s.strip.presence || "idx_#{index + 1}"
+        use_name = aliases[title] || title.gsub(/\s+/, '_').gsub(/[\W]+/, '').downcase
         add_attribute use_name, index
       end
     end
